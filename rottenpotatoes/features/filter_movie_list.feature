@@ -19,8 +19,8 @@ Background: movies have been added to database
   | Raiders of the Lost Ark | PG     | 12-Jun-1981  |
   | Chicken Run             | G      | 21-Jun-2000  |
 
-  And  I am on the RottenPotatoes home page
-  Then 10 seed movies should exist
+  # And  I am on the RottenPotatoes home page
+  # Then 10 seed movies should exist
 
 Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step(s) to check the 'PG' and 'R' checkboxes
@@ -28,19 +28,20 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step to "submit" the search form on the homepage
   # enter step(s) to ensure that PG and R movies are visible
   # enter step(s) to ensure that other movies are not visible
-  When I check the following ratings: PG, R
-  And I uncheck the following ratings: G, PG-13, NC-17
+  Given I am on the home page
+  When I uncheck the following ratings: G, NC-17, PG-13
+  And I press "Refresh" button
+  Then I should see the following movies: The Terminator, The Incredibles
+  And I should not see the following movies: Chicken Run, The Help
 
-  And I press "Refresh"
-  
-  Then I should see "The Terminator" 
-  And I should see "Amelie" 
-  And I should see "The Incredibles"
-  
-  Then I should not see "Aladdin"
-  And I should not see "Chocolat"
+  When I uncheck the following ratings: G, PG, PG-13, NC-17, R
+  And I press "Refresh" button
+  Then I should see the following movies: The Terminator, The Incredibles
+  And I should not see the following movies: Chicken Run, The Help
 
 Scenario: all ratings selected
   # see assignment
-  When I check the following ratings: G, PG, PG-13, R, NC-17
+  Given I am on the RottenPotatoes home page
+  When I check the following ratings: G, PG, PG-13, NC-17, R
+  And I press "Refresh" button
   Then I should see all the movies
