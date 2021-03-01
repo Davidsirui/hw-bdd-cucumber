@@ -23,11 +23,11 @@ Feature: display list of movies filtered by MPAA rating
   Scenario: restrict to movies with 'PG' or 'R' ratings # features/filter_movie_list.feature:25
     # enter step(s) to check the 'PG' and 'R' checkboxes
     Given I am on the home page                         # features/step_definitions/web_steps.rb:44
-    When I check the following ratings: PG, R           # features/step_definitions/movie_steps.rb:63
-    And I uncheck the following ratings: G, PG-13       # features/step_definitions/movie_steps.rb:63
+    When I check the following ratings: PG, R           # features/step_definitions/movie_steps.rb:65
+    And I uncheck the following ratings: G, PG-13       # features/step_definitions/movie_steps.rb:65
     # enter step(s) to uncheck all other checkboxes
     # enter step to "submit" the search form on the homepage
-    And I press "Refresh" button                        # features/step_definitions/movie_steps.rb:29
+    And I press "Refresh" button                        # features/step_definitions/movie_steps.rb:31
     # enter step(s) to ensure that PG and R movies are visible
     Then I should see "The Terminator"                  # features/step_definitions/web_steps.rb:105
     And I should see "Raiders of the Lost Ark"          # features/step_definitions/web_steps.rb:105
@@ -42,9 +42,9 @@ Feature: display list of movies filtered by MPAA rating
     # When I check the following ratings: G, PG, PG-13, R, NC-17
     # Then I should see all the movies
     Given I am on the RottenPotatoes home page          # features/step_definitions/web_steps.rb:44
-    When I check the following ratings: G, PG, PG-13, R # features/step_definitions/movie_steps.rb:63
-    And I press "Refresh" button                        # features/step_definitions/movie_steps.rb:29
-    Then I should see all the movies                    # features/step_definitions/movie_steps.rb:81
+    When I check the following ratings: G, PG, PG-13, R # features/step_definitions/movie_steps.rb:65
+    And I press "Refresh" button                        # features/step_definitions/movie_steps.rb:31
+    Then I should see all the movies                    # features/step_definitions/movie_steps.rb:83
 
 Feature: display list of movies sorted by different criteria
   As an avid moviegoer
@@ -71,11 +71,12 @@ Feature: display list of movies sorted by different criteria
     When I follow "Movie Title"                     # features/step_definitions/web_steps.rb:56
     Then I should see "Amelie" before "Chicken Run" # features/step_definitions/movie_steps.rb:19
 
-  Scenario: sort movies in increasing order of release date             # features/sort_movie_list.feature:30
-    When I follow "Release Date"                                        # features/step_definitions/web_steps.rb:56
-    Then I should see "Aladdin" before "Chocolat"                       # features/step_definitions/movie_steps.rb:19
-    Then I should see "Raiders of the Lost Ark" before "The Terminator" # features/step_definitions/movie_steps.rb:19
+  Scenario: sort movies in increasing order of release date            # features/sort_movie_list.feature:30
+    When I follow "Release Date"                                       # features/step_definitions/web_steps.rb:56
+    Then I should see "Aladdin" before "Chocolat"                      # features/step_definitions/movie_steps.rb:19
+    And I should see "Chicken Run" before "Amelie"                     # features/step_definitions/movie_steps.rb:19
+    And I should see "Raiders of the Lost Ark" before "The Terminator" # features/step_definitions/movie_steps.rb:19
 
 4 scenarios (4 passed)
-32 steps (32 passed)
-0m0.631s
+33 steps (33 passed)
+0m0.702s

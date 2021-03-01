@@ -19,10 +19,12 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
+  
   first = (/#{e1}/ =~ page.body)
   second = (/#{e2}/ =~ page.body)
   first.should <= second
   
+  # expect(/[\s\S]*#{e1}[\s\S]*#{e2}/).to match(page.body)
   # fail "Unimplemented"
 end
 
